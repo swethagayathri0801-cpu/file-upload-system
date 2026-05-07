@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Project</title>
+  <title>File Upload</title>
 </head>
 <body>
 
-  <h1>Hello di 👋</h1>
-  <p>This is my first project</p>
+<h2>Upload PDF Files</h2>
+
+<input type="file" id="fileInput" multiple accept="application/pdf">
+<br><br>
+
+<button onclick="uploadFiles()">Upload</button>
+
+<ul id="fileList"></ul>
+
+<script src="script.js"></script>
 
 </body>
 </html>
