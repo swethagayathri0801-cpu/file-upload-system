@@ -1,3 +1,13 @@
+function addNotification(message) {
+  const list = document.getElementById("notifications");
+  const item = document.createElement("li");
+
+  const time = new Date().toLocaleTimeString();
+  item.textContent = message + " (" + time + ")";
+
+  list.prepend(item);
+}
+
 function uploadFiles() {
   const files = document.getElementById("fileInput").files;
   const list = document.getElementById("fileList");
@@ -5,8 +15,10 @@ function uploadFiles() {
   list.innerHTML = "";
 
   if (files.length > 3) {
-    alert("Upload in progress — processing " + files.length + " files in background");
+    addNotification("Upload in progress — processing " + files.length + " files");
   }
+
+  let completed = 0;
 
   for (let i = 0; i < files.length; i++) {
     const container = document.createElement("div");
@@ -41,7 +53,12 @@ function uploadFiles() {
         percent.textContent = " " + value + "% (Uploading)";
       } else {
         clearInterval(interval);
-        percent.textContent = " 100% (Uploaded.)";
+        percent.textContent = " 100% (Uploaded ✅)";
+        completed++;
+
+        if (completed === files.length && files.length > 3) {
+          addNotification(files.length + " files uploaded successfully");
+        }
       }
     }, 300);
   }
